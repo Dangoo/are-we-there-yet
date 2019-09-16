@@ -8,6 +8,7 @@
     --fc-face-font-size: 3em;
     --fc-face-width: 2.5em;
     --fc-face-height: 3.65em;
+    --fc-label-height: 2em;
     --fc-border-radius: .25rem;
 }
 
@@ -29,7 +30,7 @@ body {
     text-align: center;
     position: relative;
     width: 100%;
-    padding-top: var(--fc-face-height);
+    padding: var(--fc-label-height) 0;
     display: inline-flex;
     box-sizing: border-box;
     align-items: flex-end;
@@ -44,8 +45,8 @@ body {
             left: 0;
             width: 100%;
             font-size: 1em;
-            height: 3em;
-            line-height: 3em;
+            height: var(--fc-label-height);
+            line-height: var(--fc-label-height);
             font-weight: 400;
             text-transform: capitalize;
             transform: translateY(-100%);
