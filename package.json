@@ -1,0 +1,28 @@
+{
+  "name": "are-we-there-yet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel src/index.html --out-dir docs/",
+    "build": "parcel build src/index.html --out-dir docs/",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dangoo/are-we-there-yet.git"
+  },
+  "author": "",
+  "license": "NONE",
+  "bugs": {
+    "url": "https://github.com/Dangoo/are-we-there-yet/issues"
+  },
+  "homepage": "https://github.com/Dangoo/are-we-there-yet#readme",
+  "dependencies": {
+    "flipclock": "^0.10.8"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "postcss-nested": "^4.1.2"
+  }
+}

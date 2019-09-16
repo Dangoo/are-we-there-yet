@@ -1,0 +1,344 @@
+:root {
+    font-size: 1vw;
+    background: #f2f2f2;
+
+    --fc-font-family: "Audi Type Screen", Helvetica, sans-serif;
+    --fc-face-color: #333;
+    --fc-face-background: #fff;
+    --fc-face-font-size: 3em;
+    --fc-face-width: 2.5em;
+    --fc-face-height: 3.65em;
+    --fc-border-radius: .25rem;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.clock-container {
+    max-width: 90%;
+    margin: auto;
+}
+
+.flip-clock {
+    font-family: var(--fc-font-family);
+    font-size: var(--fc-face-font-size);
+    -webkit-user-select: none;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    padding-top: var(--fc-face-height);
+    display: inline-flex;
+    box-sizing: border-box;
+    align-items: flex-end;
+
+    .flip-clock-group {
+        display: flex;
+        position: relative;
+
+        .flip-clock-label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            font-size: 1em;
+            height: 3em;
+            line-height: 3em;
+            font-weight: 400;
+            text-transform: capitalize;
+            transform: translateY(-100%);
+
+            /* &.flip-clock-meridium {
+                font-size: 1.75em;
+                line-height: 1.75em;
+                top: 50%;
+                left: 100%;
+                flex: 0;
+                width: auto;
+                text-transform: uppercase;
+                font-weight: 200;
+                transform: translate(.5em, -50%);
+            } */
+        }
+
+        .flip-clock-list {
+            width: var(--fc-face-width);
+            height: var(--fc-face-height);
+            position: relative;
+            border-radius: var(--fc-border-radius);
+            box-shadow:
+                0 1.5px 3px rgba(0, 0, 0, 0.24),
+                0 3px 8px rgba(0, 0, 0, 0.05);
+            font-weight: bold;
+            color: var(--fc-face-color);
+
+            &:not(:last-child) {
+                margin-right: .333em;
+            }
+
+            &:not(.flip) {
+                .active .flip-clock-list-item-inner {
+                    z-index: 4;
+                }
+
+                .flip-clock-list-item-inner {
+
+                    .top,
+                    .bottom {
+                        &:after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+
+            .flip-clock-list-item-inner {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+            }
+
+            &.flip {
+                animation-delay: 500ms;
+                animation-duration: 500ms;
+
+                .flip-clock-list-item-inner {
+                    perspective: 15em;
+                }
+
+                .top,
+                .bottom,
+                .active,
+                .active>div,
+                .before,
+                .before>div {
+                    animation-delay: inherit;
+                    animation-fill-mode: forwards;
+                    animation-duration: inherit;
+                    animation-timing-function: ease-in;
+
+                    &:after {
+                        animation-duration: inherit;
+                        animation-fill-mode: inherit;
+                        animation-timing-function: inherit;
+                    }
+                }
+
+                .before {
+                    animation-delay: 0s;
+
+                    .top {
+                        animation-name: flip-top;
+                    }
+
+                    .top:after,
+                    .bottom:after {
+                        animation-name: show-shadow;
+                    }
+                }
+
+                .active {
+                    &>div {
+                        animation-name: indexing;
+                    }
+
+                    .top:after,
+                    .bottom:after {
+                        animation-delay: calc(500ms * .15);
+                        animation-name: hide-shadow;
+                    }
+
+                    .bottom {
+                        animation-name: flip-bottom;
+                    }
+                }
+            }
+
+
+            .active {
+                z-index: 2;
+
+                .top {
+                    &:after {
+                        /* background: linear-gradient(to bottom, rgba(var(--fc-flip-shadow-color),.1) 0%, rgba(var(--fc-flip-shadow-color,1) 100%);*/
+                    }
+                }
+
+                .bottom {
+                    z-index: 2;
+                    transform-origin: top center;
+
+                    &:after {
+                        /* background: linear-gradient(to bottom, rgba(var(--fc-flip-shadow-color),1) 0%, rgba(var(--fc-flip-shadow-color,.1) 100%);*/
+                    }
+                }
+            }
+
+            .before {
+                z-index: 3;
+
+                .top {
+                    z-index: 2;
+                    transform-origin: bottom center;
+
+                    &:after {
+                        background: linear-gradient(to bottom, rgba(0, 0, 0, .1) 0%, rgba(0, 0, 0, 1) 100%);
+                    }
+                }
+
+                .bottom {
+                    &:after {
+                        background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, .1) 100%);
+                    }
+                }
+            }
+
+            .flip-clock-list-item-inner {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                /*
+                // This is a hack to fix a webkit rendering issue that causes
+                // a shift of a .5px or 1px. Leaving this until until further
+                // notice.
+                // https://stackoverflow.com/questions/24854640/strange-pixel-shifting-jumping-in-firefox-with-css-transitions
+                */
+                transform: rotateX(0.0001deg);
+
+                &:first-child {
+                    z-index: 2;
+                }
+
+                &>.top,
+                &>.bottom {
+                    width: 100%;
+                    height: 50%;
+                    overflow: hidden;
+                    position: relative;
+                    /* backface-visibility: hidden; */
+                    font-size: var(--fc-face-font-size);
+                    background: var(--fc-face-background);
+
+                    &:after {
+                        content: " ";
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        overflow: hidden;
+                    }
+
+                    &:before {
+                        content: " ";
+                        display: block;
+                        width: 100%;
+                        height: 1px;
+                        position: absolute;
+                    }
+                }
+
+                .top {
+                    border-radius: var(--fc-border-radius) var(--fc-border-radius) 0 0;
+                    line-height: calc(var(--fc-face-height) / var(--fc-face-font-size));
+
+                    &:after {
+                        border-radius: var(--fc-border-radius) var(--fc-border-radius) 0 0;
+                    }
+
+                    &:before {
+                        background: var(--fc-face-background);
+                        opacity: .4;
+                        bottom: 0;
+                    }
+                }
+
+                .bottom {
+                    border-radius: 0 0 var(--fc-border-radius) var(--fc-border-radius);
+                    line-height: 0;
+
+                    &:after {
+                        border-radius: 0 0 var(--fc-border-radius) var(--fc-border-radius);
+                    }
+
+                    &:before {
+                        background: var(--fc-face-color);
+                        opacity: .1;
+                    }
+                }
+            }
+        }
+    }
+
+    .flip-clock-divider {
+        position: relative;
+        width: var(--fc-face-width);
+        height: var(--fc-face-height);
+
+        &:before {
+            content: ":";
+            display: inline-block;
+            text-align: center;
+            font-size: var(--fc-face-font-size);
+            line-height: 1em;
+        }
+    }
+
+}
+
+@keyframes indexing {
+    0% {
+        z-index: 2;
+    }
+
+    1% {
+        z-index: 3;
+    }
+
+    100% {
+        z-index: 4;
+    }
+}
+
+@keyframes flip-bottom {
+    0% {
+        transform: rotateX(90deg);
+    }
+
+    100% {
+        transform: rotateX(0);
+    }
+}
+
+@keyframes flip-top {
+    0% {
+        transform: rotateX(0);
+    }
+
+    100% {
+        transform: rotateX(-90deg);
+    }
+}
+
+@keyframes show-shadow {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes hide-shadow {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
