@@ -1,7 +1,4 @@
 :root {
-    font-size: 1vw;
-    background: #f2f2f2;
-
     --fc-font-family: "Audi Type Screen", Helvetica, sans-serif;
     --fc-face-color: #333;
     --fc-face-background: #fff;
@@ -10,6 +7,20 @@
     --fc-face-height: 3.65em;
     --fc-label-height: 2em;
     --fc-border-radius: .25rem;
+
+    font-size: 1vw;
+    background: #f2f2f2;
+    color: #000;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --fc-face-background: #111;
+        --fc-face-color: #f2f2f2;
+
+        background: #333;
+        color: #eee;
+    }
 }
 
 body {

@@ -8,5 +8,3 @@ const clock = new FlipClock(el, new Date('2019-11-15'), {
 });
 
 clock.face = 'DayCounter'
-
-console.log(clock)
