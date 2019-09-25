@@ -5,4 +5,4 @@ var e,t=arguments[3];!function(t,n){"object"==typeof exports&&"undefined"!=typeo
 },{}],"Focm":[function(require,module,exports) {
 "use strict";var e=c(require("flipclock"));function c(e){return e&&e.__esModule?e:{default:e}}var o=document.querySelector(".js-clock"),t=new e.default(o,new Date("2019-11-15"),{clockFace:"DayCounter",countdown:!0});t.face="DayCounter",console.log(t);
 },{"flipclock":"Pv5N"}]},{},["Focm"], null)
-//# sourceMappingURL=/are-we-there-yet/src.8bcb09b5.js.map
+//# sourceMappingURL=/are-we-there-yet/src.f1df22b1.js.map
